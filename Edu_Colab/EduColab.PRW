@@ -20,9 +20,9 @@ SELECT CKO_STATUS, * FROM CKOCOL --ARQUIVO
  --------------------------------------------------------------------------------
 ----------------------------------------------------*/
 Function U_zMainColab()
-    Local chTitle  := "Assistente TOTVS COLAB."	//	Titulo do cabeçalho
-    Local chMsg	   := "Atenção!"                            //	Mensagem do cabeçalho
-    Local cTitle   := cText:=cMsg:= ""                            //	Título do painel de apresentação//	Texto do painel de apresentação
+    Local chTitle  := "Assistente TOTVS COLAB."	//	Titulo do cabeÃ§alho
+    Local chMsg	   := "AtenÃ§Ã£o!"                            //	Mensagem do cabeÃ§alho
+    Local cTitle   := cText:=cMsg:= ""                            //	TÃ­tulo do painel de apresentaÃ§Ã£o//	Texto do painel de apresentaÃ§Ã£o
     Local bNext    := bFinish := {||.T.}
 
     Private oWizard
@@ -35,18 +35,18 @@ Function U_zMainColab()
     Private cLoja  := Space(TamSX3('A2_LOJA')[1])
     Private aRet	:= {cPag, cProd, cForn,cLoja,1}
 
-    cText+="Este assistente tem como finalidade popular o ambiente para realizar um teste do TOTVS Colaboração SIGACOM."+Enter
-    cText+="- Somente rodar essa aplicação em modo exclusivo!"+Enter
-    cText+="- Realizar *backup* do banco de dados antes da atualização."+Enter
-    cText+="- Rodar a atualização somente em base de homologação."+Enter
-    cText+="- Leia com atenção as informações na próxima tela!"
+    cText+="Este assistente tem como finalidade popular o ambiente para realizar um teste do TOTVS ColaboraÃ§Ã£o SIGACOM."+Enter
+    cText+="- Somente rodar essa aplicaÃ§Ã£o em modo exclusivo!"+Enter
+    cText+="- Realizar *backup* do banco de dados antes da atualizaÃ§Ã£o."+Enter
+    cText+="- Rodar a atualizaÃ§Ã£o somente em base de homologaÃ§Ã£o."+Enter
+    cText+="- Leia com atenÃ§Ã£o as informaÃ§Ãµes na prÃ³xima tela!"
 
     //ApWizard():New( < chTitle >  ,<chMsg>,<cTitle>,<cText>,<bNext>,<bFinish>, < lPanel > , < cResHead > , < bExecute > , < lNoFirst > , < aCoord > ) --> NIL
     oWizard := APWizard():New( chTitle, chMsg, cTitle, cText, bNext,bFinish ,,,,) 
 
     //PROXIMO PAINEL
     cTitle:="Informe os dados abaixo."
-    cMsg:= "Informe os valores para realizar a população dos dados nas rotinas."+Enter+"Caso não possua registros no campo consulta pode informar qualquer valor que será incluso em seu ambiente"
+    cMsg:= "Informe os valores para realizar a populaÃ§Ã£o dos dados nas rotinas."+Enter+"Caso nÃ£o possua registros no campo consulta pode informar qualquer valor que serÃ¡ incluso em seu ambiente"
     bBack := {||.T.}
     bNext := {|| .T.}
     bFinish:= {||.T.}
@@ -142,16 +142,16 @@ Return
  --------------------------------------------------------------------------------*/
 Class TColab
     // Declaracao das propriedades da Classe
-    Data cCNPXML//:="13455068000107"
+    Data cCNPXML
     Data cIe
     Data cIeFor
     Data cPag
-    Data cProd//:="cProd"
-    Data cForn//:="COLABC"
+    Data cProd
+    Data cForn
     Data cLoja
-    Data cCodPXml//:="58890252000709"    
+    Data cCodPXml 
 
-    // Declaração dos Métodos da Classe
+    // DeclaraÃ§Ã£o dos MÃ©todos da Classe
     Method New(cCNPXML,cIe,cProd,cPag) constructor
     
     //Metodos Privados
@@ -200,7 +200,7 @@ Return self
     Local cDesc      :="Caminho dos diretorio \importadorxml "
     Local cRet      :="Sucesso!!!"
 
-     //Criação dos Diretórios
+     //CriaÃ§Ã£o dos DiretÃ³rios
 	If !ExistDir("\importadorxml")
         lRet:= MakeDir( "\importadorxml" )
         lRet:= MakeDir( "\importadorxml\lidos" )
@@ -240,7 +240,7 @@ Return
             SM0->M0_INSC := cIe  
         MSUNLOCK()
 	elseIf lRet
-        cRet:="Não foi possivel alterar o SIGAMAT ! "
+        cRet:="NÃ£o foi possivel alterar o SIGAMAT ! "
         ::xEduLog(cMet,cDesc,cRet)
         Return
 	else
@@ -265,7 +265,7 @@ Return
             SX2->X2_ARQUIVO :=PadR("CKOCOL",len(SX2->X2_ARQUIVO))
         MSUNLOCK()
     elseif lRet     
-        cRet:="Não foi possivel alterar a CKO990, verifique se tabela já está alterada"
+        cRet:="NÃ£o foi possivel alterar a CKO990, verifique se tabela jÃ¡ estÃ¡ alterada"
          ::xEduLog(cMet,cDesc,cRet)
          Return
     endIf  
@@ -376,7 +376,7 @@ Method incForn(cForn,cLoja,cCodPXml,cIeFor) Class TColab
         oModel:SetOperation(4)
         oModel:Activate()
 
-        //CabeÃ§alho
+        //CabeÃƒÂ§alho
         oModel:LoadValue('SA2MASTER','A2_COD'     ,SA2->A2_COD)
         oModel:LoadValue('SA2MASTER','A2_LOJA'    ,SA2->A2_LOJA)
         oModel:LoadValue('SA2MASTER','A2_NOME'    ,SA2->A2_NOME)
@@ -415,7 +415,7 @@ Method incForn(cForn,cLoja,cCodPXml,cIeFor) Class TColab
     oModel:SetOperation(3)
     oModel:Activate()
 
-    //CabeÃ§alho
+    //CabeÃƒÂ§alho
     oModel:LoadValue('SA2MASTER','A2_COD'  ,cForn)
     oModel:LoadValue('SA2MASTER','A2_LOJA' ,cLoja)
     oModel:LoadValue('SA2MASTER','A2_NOME' ,"COLAB                                   ")
@@ -466,10 +466,10 @@ Method incRelF(cProd,cForn,cLoja,cCodPXml) Class TColab
     if SA5->(dbSeek(xFilial("SA5")+PadR(cForn,TamSx3("A5_FORNECE")[1]) + cLoja + PadR(cProd,TamSx3("A5_PRODUTO")[1]) ))
         oModel := FWLoadModel('MATA061') //CARREGA O MODELO DE DADOS 
     
-        oModel:SetOperation(4) // SETA A OPERAÃ‡ÃƒO
+        oModel:SetOperation(4) // SETA A OPERAÃƒÂ‡ÃƒÂƒO
         oModel:Activate() // ATIVA O MODELO DADOS
 
-        //CabeÃ§alho
+        //CabeÃƒÂ§alho
         oModel:LoadValue('MdFieldSA5','A5_PRODUTO',SA5->A5_PRODUTO )// ADICIONA NO CAMPO A5_PRODUTO O VALOR DEFINIDO EM cProd061
         oModel:LoadValue('MdFieldSA5','A5_NOMPROD',SA5->A5_NOMPROD)// ADICIONA NO CAMPO A5_NOMPROD O VALOR PRODUTO 061 CT001
 
@@ -501,10 +501,10 @@ Method incRelF(cProd,cForn,cLoja,cCodPXml) Class TColab
 
     oModel := FWLoadModel('MATA061') //CARREGA O MODELO DE DADOS 
     
-    oModel:SetOperation(3) // SETA A OPERAÃ‡ÃƒO
+    oModel:SetOperation(3) // SETA A OPERAÃƒÂ‡ÃƒÂƒO
     oModel:Activate() // ATIVA O MODELO DADOS
     
-    //CabeÃ§alho
+    //CabeÃƒÂ§alho
     oModel:LoadValue('MdFieldSA5','A5_PRODUTO',PadR(cProd,TamSx3("A5_PRODUTO")[1]) )// ADICIONA NO CAMPO A5_PRODUTO O VALOR DEFINIDO EM cProd061
     oModel:LoadValue('MdFieldSA5','A5_NOMPROD',PadR('TOTVS COLAB1                  ',TamSx3("A5_NOMPROD")[1]))// ADICIONA NO CAMPO A5_NOMPROD O VALOR PRODUTO 061 CT001
     
@@ -585,7 +585,7 @@ Return .T.
     cXml+='1</tpAmb>  <verAplic>RS20200915181434</verAplic>  <chCTe>29200958890252000709570100056339021682302730</chCTe>  <dhRecbto>2020-09-29T19:16:28-03:00</dhRecbto>  <nProt>329200032243249</nProt>  '
     cXml+='<digVal>HzpvsG2/xRQ9/QFTYpe4UUumuhk=</digVal>  <cStat>100</cStat>  <xMotivo>Autorizado o uso do CT-e</xMotivo></infProt></protCTe></cteProc>'
 
-    //Criação do Arquivo
+    //CriaÃ§Ã£o do Arquivo
     nHandle := FCREATE("\importadorxml\inn\TesteColabCTE.XML")
   
     if nHandle = -1
@@ -809,7 +809,7 @@ Return
     cXml+='</protNFe>'
     cXml+='</nfeProc>'
 
-    //Criação do Arquivo
+    //CriaÃ§Ã£o do Arquivo
     nHandle := FCREATE("\importadorxml\inn\TesteColab.XML")
   
     if nHandle = -1
